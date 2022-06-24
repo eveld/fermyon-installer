@@ -49,6 +49,8 @@ template "download_spin" {
 }
 
 exec_remote "download_spin" {
+  depends_on = ["template.download_spin"]
+
   image {
     name = "shipyardrun/hashicorp-tools:v0.9.0"
   }
@@ -72,6 +74,8 @@ exec_remote "download_spin" {
 // The nomad cluster
 //
 nomad_cluster "dc1" {
+  depends_on = ["exec_remote.download_spin", "template.consul_agent_config"]
+
   version      = var.nomad_version
   client_nodes = var.nomad_client_nodes
 
@@ -86,10 +90,10 @@ nomad_cluster "dc1" {
   //   destination = "/etc/nomad.d/allow.hcl"
   // }
 
-  volume {
-    source      = "${data("nomad")}/plugin.hcl"
-    destination = "/etc/nomad.d/plugin.hcl"
-  }
+  // volume {
+  //   source      = "${data("nomad")}/plugin.hcl"
+  //   destination = "/etc/nomad.d/plugin.hcl"
+  // }
 
   volume {
     source      = "${data("nomad")}/spin"

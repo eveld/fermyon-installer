@@ -9,6 +9,12 @@
 shipyard run github.com/eveld/fermyon-installer
 ```
 
+## Get the endpoints for consul, nomad, traefik
+
+```shell
+shipyard env
+```
+
 ## Clean up the environment
 
 ```shell
