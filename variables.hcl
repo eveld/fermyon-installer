@@ -1,5 +1,5 @@
 variable "nomad_version" {
-  default = "1.3.1-1"
+  default = "1.3.1"
 }
 
 variable "nomad_client_nodes" {
